@@ -1,4 +1,4 @@
-# coding: utf8
+# coding: utf-8
 """
     Speed tests
     -----------
@@ -11,20 +11,19 @@
 """
 
 
-from __future__ import unicode_literals, division
+from __future__ import division, unicode_literals
 
-import sys
-import os.path
 import contextlib
-import timeit
 import functools
+import os.path
+import sys
+import timeit
 
 from cssutils import parseString
 
 from .. import tokenizer
 from ..css21 import CSS21Parser
 from ..parsing import remove_whitespace
-
 
 CSS_REPEAT = 4
 TIMEIT_REPEAT = 3
@@ -64,6 +63,7 @@ def parse(tokenizer_name):
         result.append((selector, declarations))
     return result
 
+
 parse_cython = functools.partial(parse, 'cython_tokenize_flat')
 parse_python = functools.partial(parse, 'python_tokenize_flat')
 
@@ -82,8 +82,6 @@ def parse_cssutils():
 
 def check_consistency():
     result = parse_python()
-    #import pprint
-    #pprint.pprint(result)
     assert len(result) > 0
     if tokenizer.cython_tokenize_flat:
         assert parse_cython() == result

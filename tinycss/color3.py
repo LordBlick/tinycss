@@ -1,4 +1,4 @@
-# coding: utf8
+# coding: utf-8
 """
     tinycss.colors3
     ---------------
@@ -13,7 +13,8 @@
     :license: BSD, see LICENSE for more details.
 """
 
-from __future__ import unicode_literals, division
+from __future__ import division, unicode_literals
+
 import collections
 import itertools
 import re

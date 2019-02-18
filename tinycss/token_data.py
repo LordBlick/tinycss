@@ -1,4 +1,4 @@
-# coding: utf8
+# coding: utf-8
 """
     tinycss.token_data
     ------------------
@@ -11,12 +11,11 @@
 
 from __future__ import unicode_literals
 
-import re
-import sys
-import operator
 import functools
+import operator
+import re
 import string
-
+import sys
 
 # * Raw strings with the r'' notation are used so that \ do not need
 #   to be escaped.
@@ -187,6 +186,7 @@ def _init():
         for names in dispatch
     )
 
+
 _init()
 
 
@@ -197,6 +197,7 @@ def _unicode_replace(match, int=int, unichr=unichr, maxunicode=sys.maxunicode):
     else:
         return '\N{REPLACEMENT CHARACTER}'  # U+FFFD
 
+
 UNICODE_UNESCAPE = functools.partial(
     re.compile(COMPILED_MACROS['unicode'], re.I).sub,
     _unicode_replace)
@@ -206,7 +207,7 @@ NEWLINE_UNESCAPE = functools.partial(
     '')
 
 SIMPLE_UNESCAPE = functools.partial(
-    re.compile(r'\\(%s)' % COMPILED_MACROS['simple_escape'] , re.I).sub,
+    re.compile(r'\\(%s)' % COMPILED_MACROS['simple_escape'], re.I).sub,
     # Same as r'\1', but faster on CPython
     operator.methodcaller('group', 1))
 
@@ -328,16 +329,18 @@ class Token(object):
     def __repr__(self):
         return ('<Token {0.type} at {0.line}:{0.column} {0.value!r}{1}>'
                 .format(self, self.unit or ''))
-    
+
     def __eq__(self, other):
         if type(self) != type(other):
-            raise TypeError("Cannot compare %s and %s" % type(self), type(other))
-        else: return all(
-            self.type_ == other.type_,
-            self._as_css == other._as_css,
-            self.value == other.value,
-            self.unit == other.unit,
-        )
+            raise TypeError(
+                'Cannot compare {0} and {1}'.format(type(self), type(other)))
+        else:
+            return all(
+                self.type_ == other.type_,
+                self._as_css == other._as_css,
+                self.value == other.value,
+                self.unit == other.unit,
+            )
 
 
 class ContainerToken(object):

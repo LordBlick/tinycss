@@ -1,4 +1,4 @@
-# coding: utf8
+# coding: utf-8
 """
     tinycss
     -------
@@ -9,17 +9,18 @@
     :license: BSD, see LICENSE for more details.
 """
 
-import sys
-
 from .version import VERSION
-__version__ = VERSION
 
 from .css21 import CSS21Parser
 from .page3 import CSSPage3Parser
+from .fonts3 import CSSFonts3Parser
 
+
+__version__ = VERSION
 
 PARSER_MODULES = {
     'page3': CSSPage3Parser,
+    'fonts3': CSSFonts3Parser,
 }
 
 
@@ -30,6 +31,8 @@ def make_parser(*features, **kwargs):
         Positional arguments are base classes the new parser class will extend.
         The string ``'page3'`` is accepted as short for
         :class:`~page3.CSSPage3Parser`.
+        The string ``'fonts3'`` is accepted as short for
+        :class:`~fonts3.CSSFonts3Parser`.
     :param kwargs:
         Keyword arguments are passed to the parser’s constructor.
     :returns:
